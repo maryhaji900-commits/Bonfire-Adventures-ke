@@ -1,1 +1,7 @@
-
+<!-- PLACEHOLDER LOGO — replace this file with the real Bonfire Adventures logo.
+     Keep the filename (bonfire-logo.svg) and the header will pick it up automatically. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Bonfire Adventures logo placeholder">
+  <rect width="64" height="64" rx="14" fill="#E08A2C"/>
+  <path d="M32 12c-1 6-8 10-8 18a8 8 0 0 0 16 0c0-3-1.5-5-3-7 .5 3-1 4.5-2.5 5 1-4-1-8-2.5-11-1 3-3 4-5 6 1-4 3.5-7 5-11z" fill="#1F3F27"/>
+  <path d="M20 46c3 3 8 5 12 5s9-2 12-5" stroke="#1F3F27" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+</svg>
