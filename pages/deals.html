@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deals — Bonfire Adventures</title>
+<meta name="description" content="Hot deals, last-minute offers, seasonal and group discounts across Bonfire Adventures' packages, hotels and B&Bs. Expired deals are never shown as active.">
+<link rel="canonical" href="https://www.YOUR-LIVE-DOMAIN-HERE.com/pages/deals.html">
+<meta property="og:title" content="Deals — Bonfire Adventures">
+<meta property="og:description" content="Hot deals, last-minute offers, seasonal and group discounts across Bonfire Adventures' packages, hotels and B&Bs. Expired deals are never shown as active.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.YOUR-LIVE-DOMAIN-HERE.com/pages/deals.html">
+<meta property="og:image" content="https://www.YOUR-LIVE-DOMAIN-HERE.com/assets/images/hero/mombasa-05-aerial.jpg">
+<meta property="og:site_name" content="Bonfire Adventures">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Deals — Bonfire Adventures">
+<meta name="twitter:description" content="Hot deals, last-minute offers, seasonal and group discounts across Bonfire Adventures' packages, hotels and B&Bs. Expired deals are never shown as active.">
+<meta name="twitter:image" content="https://www.YOUR-LIVE-DOMAIN-HERE.com/assets/images/hero/mombasa-05-aerial.jpg">
+<link rel="stylesheet" href="../styles.css?v=2">
+<link rel="icon" type="image/svg+xml" href="../assets/logos/bonfire-logo.svg">
+</head>
+<body id="page-deals">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="../index.html"><img src="../assets/logos/bonfire-logo.svg" alt="Bonfire Adventures logo" class="brand-logo"> Bonfire Adventures</a>
+    <nav class="main-nav" aria-label="Primary">
+      <a href="destinations.html">Destinations</a>
+      <a href="packages.html">Packages</a>
+      <a href="hotels.html">Hotels &amp; B&amp;Bs</a>
+      <a href="deals.html">Deals</a>
+      <span class="nav-divider" aria-hidden="true"></span>
+      <a href="compare.html" class="nav-secondary">Compare <span class="compare-badge" data-compare-count>0</span></a>
+      <a href="contact.html" class="nav-secondary">Contact</a>
+      <div class="header-search header-search--mobile">
+        <input type="search" placeholder="Search Kenya…" aria-label="Global search" data-global-search>
+        <div class="gs-results" hidden data-global-search-results></div>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <div class="header-search">
+        <input type="search" placeholder="Search Kenya…" aria-label="Global search" data-global-search>
+        <div class="gs-results" hidden data-global-search-results></div>
+      </div>
+      <a class="btn btn-whatsapp btn-sm" data-whatsapp data-message="Hi, I'd like to speak with a Travel Advisor." target="_blank" rel="noopener"><span class="long">Advisor</span> 💬</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-hero has-photo" style="--hero-photo:url('../assets/images/hotels/golden-tulip-westlands.jpg');">
+    <div class="container">
+      <div class="breadcrumbs" style="color:rgba(250,247,239,.7);"><a href="../index.html" style="color:rgba(250,247,239,.9);">Home</a> / Deals</div>
+      <h1>Deals</h1>
+      <p>Time-boxed offers from the same master inventory as Packages and Hotels. Expired deals are automatically hidden.</p>
+    </div>
+  </div>
+
+  <div class="container section" data-list-view>
+    <div class="chip-row" id="deal-chips" style="margin-bottom:26px;"></div>
+    <div class="section-head" style="margin-bottom:16px;">
+      <p id="result-count" style="margin:0;font-size:.9rem;color:rgba(22,36,28,.6);"></p>
+    </div>
+    <div class="card-grid" data-deal-results></div>
+  </div>
+
+  <div class="container section" data-detail-view hidden></div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© <span data-year></span> Bonfire Adventures. All rights reserved. Prices shown are indicative and confirmed by a Travel Advisor before booking.</span>
+      <a href="../index.html" style="color:rgba(250,247,239,.75);">Back to home</a>
+    </div>
+  </div>
+</footer>
+
+<a class="fab-whatsapp" data-whatsapp data-message="Hi, I'd like help with a deal." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">💬</a>
+
+<script src="../data.js?v=2"></script>
+<script src="../script.js?v=2"></script>
+<script>
+(function () {
+  const params = new URLSearchParams(location.search);
+  const dealId = params.get('id');
+
+  if (dealId) {
+    renderDetail(dealId);
+  } else {
+    let activeCat = params.get('category') || '';
+    initList(activeCat);
+  }
+
+  function renderDetail(id) {
+    const deal = BONFIRE_DATA.DEALS.find(function (d) { return d.id === id; });
+    document.querySelector('[data-list-view]').hidden = true;
+    const detail = document.querySelector('[data-detail-view]');
+    detail.hidden = false;
+
+    if (!deal) {
+      detail.innerHTML = Bonfire.emptyStateHTML({ title: 'Deal not found', text: 'This offer may have expired or been removed.', altHref: 'deals.html', altLabel: 'See all active deals', waMessage: 'Hi, are there any current deals available?' });
+      Bonfire.initWhatsAppButtons();
+      Bonfire.initLazyBackgrounds();
+      return;
+    }
+
+    const active = BONFIRE_DATA.isDealActive(deal, new Date());
+    const pkg = deal.packageId ? BONFIRE_DATA.getPackageById(deal.packageId) : null;
+    const hotel = deal.hotelId ? BONFIRE_DATA.getHotelById(deal.hotelId) : null;
+    const dest = pkg ? BONFIRE_DATA.getDestinationById(pkg.destinationId) : null;
+    const img = pkg && dest && dest.images && dest.images[0] ? dest.images[0].src : (hotel ? hotel.image : '');
+    const savings = deal.originalPrice - deal.dealPrice;
+
+    let linkedHTML = '';
+    if (pkg) {
+      linkedHTML =
+        '<h2>Package included in this deal</h2>' +
+        '<p>' + pkg.desc + '</p>' +
+        '<ul>' + pkg.inclusions.map(function (i) { return '<li>' + i + '</li>'; }).join('') + '</ul>' +
+        '<a class="btn btn-outline btn-sm" href="packages.html?id=' + pkg.id + '">View full package details</a>';
+    } else if (hotel) {
+      linkedHTML =
+        '<h2>Property included in this deal</h2>' +
+        '<p>' + hotel.description + '</p>' +
+        '<a class="btn btn-outline btn-sm" href="hotels.html?id=' + hotel.id + '">View full hotel details</a>';
+    }
+
+    detail.innerHTML =
+      '<div class="breadcrumbs" style="margin-bottom:16px;"><a href="../index.html">Home</a> / <a href="deals.html">Deals</a> / ' + deal.title + '</div>' +
+      '<div class="layout-split">' +
+        '<div style="grid-column:1/-1;display:grid;grid-template-columns:1.3fr 1fr;gap:32px;">' +
+          '<div>' +
+            (img ? '<div class="card-media" data-bg="../' + img + '" style="aspect-ratio:16/9;border-radius:var(--radius);margin-bottom:20px;"><span class="badge">' + deal.category + (active ? '' : ' · Expired') + '</span></div>' : '') +
+            '<h1>' + deal.title + '</h1>' +
+            '<p>Travel period: ' + deal.travelPeriod + ' · Valid until ' + new Date(deal.validUntil).toLocaleDateString('en-KE', { day: 'numeric', month: 'short', year: 'numeric' }) + '</p>' +
+            '<h2>What\'s included</h2>' +
+            '<ul style="list-style:disc;padding-left:20px;margin-bottom:16px;">' + deal.inclusions.map(function (i) { return '<li>' + i + '</li>'; }).join('') + '</ul>' +
+            (linkedHTML ? linkedHTML : '') +
+          '</div>' +
+          '<aside class="filters" style="position:sticky;top:92px;">' +
+            '<div class="price" style="font-size:1.4rem;margin-bottom:4px;"><span class="was">' + BONFIRE_DATA.formatKES(deal.originalPrice) + '</span> ' + BONFIRE_DATA.formatKES(deal.dealPrice) + ' <small>per person</small></div>' +
+            '<p style="font-size:.85rem;color:rgba(22,36,28,.6);margin-bottom:16px;">Save ' + BONFIRE_DATA.formatKES(savings) + ' vs. standard rate — indicative pricing, confirmed by a Travel Advisor.</p>' +
+            (active
+              ? '<a class="btn btn-primary" style="width:100%;justify-content:center;" data-whatsapp data-product="' + deal.title + '" target="_blank" rel="noopener" data-analytics="deal-claim">Claim This Deal</a>'
+              : '<p style="font-size:.86rem;"><strong>This offer has expired.</strong> Ask a Travel Advisor about current offers on this route.</p><a class="btn btn-whatsapp" style="width:100%;justify-content:center;" data-whatsapp data-message="Hi, the ' + deal.title + ' deal has expired — are there any similar current offers?" target="_blank" rel="noopener">Ask a Travel Advisor</a>') +
+          '</aside>' +
+        '</div>' +
+      '</div>';
+
+    Bonfire.initWhatsAppButtons();
+    Bonfire.initLazyBackgrounds();
+  }
+
+  function initList(activeCat) {
+  const categories = Array.from(new Set(BONFIRE_DATA.DEALS.map(function (d) { return d.category; })));
+
+  function renderChips() {
+    const wrap = document.getElementById('deal-chips');
+    const all = document.createElement('button');
+    all.type = 'button'; all.className = 'chip' + (activeCat ? '' : ' is-active'); all.textContent = 'All Active Deals';
+    all.addEventListener('click', function () { activeCat = ''; renderChips(); renderGrid(); });
+    wrap.innerHTML = '';
+    wrap.appendChild(all);
+    categories.forEach(function (cat) {
+      const chip = document.createElement('button');
+      chip.type = 'button'; chip.className = 'chip' + (activeCat === cat ? ' is-active' : ''); chip.textContent = cat;
+      chip.addEventListener('click', function () { activeCat = cat; renderChips(); renderGrid(); });
+      wrap.appendChild(chip);
+    });
+  }
+
+  function renderGrid() {
+    let deals = BONFIRE_DATA.getActiveDeals();
+    if (activeCat) deals = deals.filter(function (d) { return d.category === activeCat; });
+    document.getElementById('result-count').textContent = deals.length + ' active deal' + (deals.length === 1 ? '' : 's');
+    const wrap = document.querySelector('[data-deal-results]');
+    wrap.innerHTML = deals.length
+      ? deals.map(Bonfire.dealCardHTML).join('')
+      : Bonfire.emptyStateHTML({ title: 'No active deals in this category right now', text: 'Deals rotate often — check back soon, or ask an Advisor about upcoming offers.', altHref: 'deals.html', altLabel: 'See all active deals', waMessage: 'Hi, are there any upcoming deals for this category?' });
+    Bonfire.initWhatsAppButtons();
+    Bonfire.initLazyBackgrounds();
+  }
+
+  renderChips();
+  renderGrid();
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hotels &amp; B&amp;Bs — Bonfire Adventures</title>
+<meta name="description" content="Search Kenya hotels, resorts, lodges and B&Bs by region, town or name. Compact listings across Coast, Rift Valley, Nairobi, Safari and Mount Kenya regions, with WhatsApp booking support.">
+<link rel="canonical" href="https://www.YOUR-LIVE-DOMAIN-HERE.com/pages/hotels.html">
+<meta property="og:title" content="Hotels &amp; B&amp;Bs — Bonfire Adventures">
+<meta property="og:description" content="Search Kenya hotels, resorts, lodges and B&Bs by region, town or name. Compact listings across Coast, Rift Valley, Nairobi, Safari and Mount Kenya regions, with WhatsApp booking support.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.YOUR-LIVE-DOMAIN-HERE.com/pages/hotels.html">
+<meta property="og:image" content="https://www.YOUR-LIVE-DOMAIN-HERE.com/assets/images/hero/mombasa-07-tusks.jpg">
+<meta property="og:site_name" content="Bonfire Adventures">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hotels &amp; B&amp;Bs — Bonfire Adventures">
+<meta name="twitter:description" content="Search Kenya hotels, resorts, lodges and B&Bs by region, town or name. Compact listings across Coast, Rift Valley, Nairobi, Safari and Mount Kenya regions, with WhatsApp booking support.">
+<meta name="twitter:image" content="https://www.YOUR-LIVE-DOMAIN-HERE.com/assets/images/hero/mombasa-07-tusks.jpg">
+<link rel="stylesheet" href="../styles.css?v=2">
+<link rel="icon" type="image/svg+xml" href="../assets/logos/bonfire-logo.svg">
+</head>
+<body id="page-hotels">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="../index.html"><img src="../assets/logos/bonfire-logo.svg" alt="Bonfire Adventures logo" class="brand-logo"> Bonfire Adventures</a>
+    <nav class="main-nav" aria-label="Primary">
+      <a href="destinations.html">Destinations</a>
+      <a href="packages.html">Packages</a>
+      <a href="hotels.html">Hotels &amp; B&amp;Bs</a>
+      <a href="deals.html">Deals</a>
+      <span class="nav-divider" aria-hidden="true"></span>
+      <a href="compare.html" class="nav-secondary">Compare <span class="compare-badge" data-compare-count>0</span></a>
+      <a href="contact.html" class="nav-secondary">Contact</a>
+      <div class="header-search header-search--mobile">
+        <input type="search" placeholder="Search Kenya…" aria-label="Global search" data-global-search>
+        <div class="gs-results" hidden data-global-search-results></div>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <div class="header-search">
+        <input type="search" placeholder="Search Kenya…" aria-label="Global search" data-global-search>
+        <div class="gs-results" hidden data-global-search-results></div>
+      </div>
+      <a class="btn btn-whatsapp btn-sm" data-whatsapp data-message="Hi, I'd like to speak with a Travel Advisor." target="_blank" rel="noopener"><span class="long">Advisor</span> 💬</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-hero has-photo" style="--hero-photo:url('../assets/images/hotels/serena-beach-resort-spa.jpg');">
+    <div class="container">
+      <div class="breadcrumbs" style="color:rgba(250,247,239,.7);"><a href="../index.html" style="color:rgba(250,247,239,.9);">Home</a> / Hotels &amp; B&amp;Bs</div>
+      <h1 id="page-title">Hotels &amp; B&amp;Bs</h1>
+      <p id="page-sub">Search by name, town or region — from beach resorts to safari camps, all from one central hotel database.</p>
+    </div>
+  </div>
+
+  <div class="container section" id="list-view">
+    <div class="hotel-search-bar">
+      <input type="search" id="hotel-query" placeholder="Search hotel name, town, region, or type — e.g. &quot;Mombasa&quot;, &quot;Coast&quot;, &quot;Safari Lodge&quot;, &quot;B&amp;B&quot;" aria-label="Search hotels">
+    </div>
+
+    <div class="chip-row" style="margin-bottom:16px;">
+      <button type="button" class="chip is-active" id="search-anywhere">All Regions</button>
+    </div>
+    <div class="region-grid" id="region-grid" style="margin-bottom:14px;"></div>
+    <div class="chip-row" id="town-row" style="margin-bottom:26px;"></div>
+
+    <div class="layout-split">
+      <aside class="filters" aria-label="Filter hotels">
+        <h4>Accommodation Type</h4>
+        <div class="filter-group"><select id="f-type"><option value="">Any type</option></select></div>
+        <h4>Price</h4>
+        <div class="filter-group"><select id="f-price">
+          <option value="">Any price</option>
+          <option value="0-5000">Under KSh 5,000</option>
+          <option value="5000-10000">KSh 5,000–10,000</option>
+          <option value="10000-20000">KSh 10,000–20,000</option>
+          <option value="20000-30000">KSh 20,000–30,000</option>
+          <option value="30000-50000">KSh 30,000–50,000</option>
+          <option value="50000-999999">KSh 50,000+</option>
+        </select></div>
+        <button class="btn btn-ghost btn-sm" id="f-clear" style="width:100%;justify-content:center;">Clear filters</button>
+      </aside>
+
+      <div>
+        <div class="section-head" style="margin-bottom:16px;">
+          <p id="result-count" style="margin:0;font-size:.9rem;color:rgba(22,36,28,.6);"></p>
+          <div class="form-field" style="max-width:220px;">
+            <label for="f-sort" class="visually-hidden">Sort</label>
+            <select id="f-sort">
+              <option value="recommended">Sort: Recommended</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="popular">Most Popular</option>
+              <option value="name">Name A–Z</option>
+            </select>
+          </div>
+        </div>
+        <div class="card-grid card-grid--compact" data-hotel-results></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container section" id="detail-view" hidden>
+    <div class="breadcrumbs"><a href="../index.html">Home</a> / <a href="hotels.html">Hotels &amp; B&amp;Bs</a> / <span data-detail-crumb></span></div>
+    <div id="detail-content"></div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© <span data-year></span> Bonfire Adventures. Prices shown are indicative starting rates — confirm live availability with a Travel Advisor.</span>
+      <a href="../index.html" style="color:rgba(250,247,239,.75);">Back to home</a>
+    </div>
+  </div>
+</footer>
+
+<a class="fab-whatsapp" data-whatsapp data-message="Hi, I'd like help finding a hotel or B&amp;B." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">💬</a>
+
+<script src="../data.js?v=2"></script>
+<script src="../script.js?v=2"></script>
+<script>
+(function () {
+  const params = new URLSearchParams(location.search);
+  const id = params.get('id');
+  let state = { region: '', town: '' };
+
+  function renderRegionGrid() {
+    const wrap = document.getElementById('region-grid');
+    wrap.innerHTML = '';
+    Object.keys(BONFIRE_DATA.REGIONS).forEach(function (region) {
+      const count = BONFIRE_DATA.HOTELS.filter(function (h) { return h.region === region; }).length;
+      if (!count) return;
+      const btn = document.createElement('button');
+      btn.type = 'button'; btn.className = 'region-tile' + (state.region === region ? ' is-active' : '');
+      btn.innerHTML = region + '<span class="count">' + count + ' propert' + (count === 1 ? 'y' : 'ies') + '</span>';
+      btn.addEventListener('click', function () {
+        state.region = state.region === region ? '' : region; state.town = '';
+        renderRegionGrid(); renderTowns(); applyFilters();
+      });
+      wrap.appendChild(btn);
+    });
+  }
+
+  function renderTowns() {
+    const row = document.getElementById('town-row');
+    row.innerHTML = '';
+    if (!state.region) return;
+    const towns = Array.from(new Set(BONFIRE_DATA.HOTELS.filter(function (h) { return h.region === state.region; }).map(function (h) { return h.town; })));
+    towns.sort();
+    towns.forEach(function (town) {
+      const chip = document.createElement('button');
+      chip.type = 'button'; chip.className = 'chip' + (state.town === town ? ' is-active' : '');
+      chip.textContent = town;
+      chip.addEventListener('click', function () {
+        state.town = state.town === town ? '' : town;
+        renderTowns(); applyFilters();
+      });
+      row.appendChild(chip);
+    });
+  }
+
+  document.getElementById('search-anywhere').addEventListener('click', function () {
+    state = { region: '', town: '' };
+    document.getElementById('hotel-query').value = '';
+    renderRegionGrid(); renderTowns();
+    applyFilters();
+  });
+
+  function populateSelect(sel, items) {
+    Array.from(new Set(items)).sort().forEach(function (i) {
+      const o = document.createElement('option'); o.value = i; o.textContent = i; sel.appendChild(o);
+    });
+  }
+  populateSelect(document.getElementById('f-type'), BONFIRE_DATA.HOTELS.map(function (h) { return h.accommodationType; }));
+
+  function matchesQuery(h, q) {
+    if (!q) return true;
+    q = q.toLowerCase();
+    const dest = BONFIRE_DATA.getDestinationById(h.destination);
+    const haystack = [h.name, h.town, h.region, h.accommodationType, dest ? dest.name : ''].join(' ').toLowerCase();
+    return haystack.indexOf(q) !== -1;
+  }
+
+  function applyFilters() {
+    const query = document.getElementById('hotel-query').value.trim();
+    const priceRange = document.getElementById('f-price').value;
+    const type = document.getElementById('f-type').value;
+    const sort = document.getElementById('f-sort').value;
+
+    let results = BONFIRE_DATA.HOTELS.filter(function (h) {
+      if (state.region && h.region !== state.region) return false;
+      if (state.town && h.town !== state.town) return false;
+      if (!matchesQuery(h, query)) return false;
+      if (priceRange) {
+        const parts = priceRange.split('-').map(Number);
+        const lo = parts[0], hi = parts[1];
+        if (h.price == null) return false;
+        if (h.price < lo || h.price > hi) return false;
+      }
+      if (type && h.accommodationType !== type) return false;
+      return true;
+    });
+
+    results = results.slice().sort(function (a, b) {
+      if (sort === 'price-asc') return (a.price == null ? Infinity : a.price) - (b.price == null ? Infinity : b.price);
+      if (sort === 'price-desc') return (b.price == null ? -Infinity : b.price) - (a.price == null ? -Infinity : a.price);
+      if (sort === 'name') return a.name.localeCompare(b.name);
+      if (sort === 'popular') return (b.guestRating || 0) - (a.guestRating || 0);
+      return 0;
+    });
+
+    const wrap = document.querySelector('[data-hotel-results]');
+    document.getElementById('result-count').textContent = results.length + ' propert' + (results.length === 1 ? 'y' : 'ies') + ' found';
+    wrap.innerHTML = results.length
+      ? results.map(Bonfire.hotelCardHTML).join('')
+      : Bonfire.emptyStateHTML({ title: 'No properties match yet', text: 'Try a broader region, fewer filters, or ask an Advisor for hand-picked options.', altHref: 'hotels.html', altLabel: 'Search anywhere' });
+    Bonfire.initWhatsAppButtons();
+    Bonfire.initLazyBackgrounds();
+  }
+
+  document.getElementById('hotel-query').addEventListener('input', applyFilters);
+  ['f-price','f-type','f-sort'].forEach(function (fid) { document.getElementById(fid).addEventListener('change', applyFilters); });
+  document.getElementById('f-clear').addEventListener('click', function () {
+    document.querySelectorAll('.filters select').forEach(function (s) { s.value = ''; });
+    document.getElementById('hotel-query').value = '';
+    applyFilters();
+  });
+
+  function renderDetail(h) {
+    const dest = BONFIRE_DATA.getDestinationById(h.destination);
+    document.getElementById('page-title').textContent = h.name;
+    document.getElementById('page-sub').textContent = h.town + ', ' + h.region;
+    document.querySelector('[data-detail-crumb]').textContent = h.name;
+    document.title = h.name + ' — Bonfire Adventures';
+    document.getElementById('list-view').hidden = true;
+    document.getElementById('detail-view').hidden = false;
+
+    const priceLine = h.price
+      ? Bonfire.formatKES(h.price) + ' <small>' + h.priceBasis + '</small>'
+      : '<span style="font-size:1.1rem;">Check Availability</span>';
+
+    const imgs = (h.images && h.images.length ? h.images : [h.image]);
+    const gallery = imgs.map(function (img) {
+      return '<div class="dest-gallery-photo" data-bg="../' + img + '" role="img" aria-label="' + h.name + '"></div>';
+    }).join('');
+
+    document.getElementById('detail-content').innerHTML =
+      '<div style="display:grid;grid-template-columns:1.3fr 1fr;gap:32px;">' +
+        '<div>' +
+          '<div class="dest-gallery" style="margin-bottom:20px;">' + gallery + '</div>' +
+          '<h2>About this property</h2><p>' + h.description + '</p>' +
+          '<p style="font-size:.86rem;"><strong>Accommodation type:</strong> ' + h.accommodationType + '</p>' +
+          '<p style="font-size:.86rem;"><strong>Location:</strong> ' + h.town + ', ' + h.region + (dest ? ' · part of ' + dest.name : '') + '</p>' +
+          '<p style="font-size:.86rem;"><strong>Availability:</strong> ' + h.availabilityStatus + '</p>' +
+        '</div>' +
+        '<aside class="filters" style="position:sticky;top:92px;">' +
+          '<div class="price" style="font-size:1.4rem;margin-bottom:4px;">' + priceLine + '</div>' +
+          '<p style="font-size:.85rem;color:rgba(22,36,28,.6);margin-bottom:16px;">Indicative pricing — confirm live rates with a Travel Advisor.</p>' +
+          '<h4 style="margin-top:0;">Interested in this property?</h4>' +
+          '<p style="font-size:.86rem;">Let Bonfire Adventures help you check availability, confirm the current price and arrange your booking.</p>' +
+          '<a class="btn btn-primary" style="width:100%;justify-content:center;margin-top:6px;" href="#request-booking" data-analytics="booking-start">Request a Booking</a>' +
+          '<a class="btn btn-outline" style="width:100%;justify-content:center;margin-top:10px;" href="' + Bonfire.callBonfireLink() + '">Call Bonfire</a>' +
+          '<a class="btn btn-ghost" style="width:100%;justify-content:center;margin-top:10px;" href="hotels.html">← Back to Results</a>' +
+        '</aside>' +
+      '</div>' +
+      '<div class="section" id="request-booking" style="padding-bottom:0;">' +
+        '<h2>Request a Booking</h2>' +
+        '<form id="booking-form">' +
+          '<div class="form-grid">' +
+            '<div class="form-field"><label for="bf-name">Full Name</label><input type="text" id="bf-name"></div>' +
+            '<div class="form-field"><label for="bf-phone">Phone / WhatsApp</label><input type="tel" id="bf-phone"></div>' +
+            '<div class="form-field"><label for="bf-email">Email</label><input type="email" id="bf-email"></div>' +
+            '<div class="form-field"><label for="bf-property">Hotel/Property</label><input type="text" id="bf-property" value="' + h.name + '" readonly></div>' +
+            '<div class="form-field"><label for="bf-dest">Destination</label><input type="text" id="bf-dest" value="' + h.town + '" readonly></div>' +
+            '<div class="form-field"><label for="bf-checkin">Check-in Date</label><input type="date" id="bf-checkin"></div>' +
+            '<div class="form-field"><label for="bf-checkout">Check-out Date</label><input type="date" id="bf-checkout"></div>' +
+            '<div class="form-field"><label for="bf-adults">Adults</label><input type="number" id="bf-adults" min="1" value="2"></div>' +
+            '<div class="form-field"><label for="bf-children">Children</label><input type="number" id="bf-children" min="0" value="0"></div>' +
+            '<div class="form-field"><label for="bf-room">Room Preference</label><input type="text" id="bf-room" placeholder="e.g. Sea view, twin beds"></div>' +
+            '<div class="form-field full"><label for="bf-notes">Special Requests</label><textarea id="bf-notes" rows="3"></textarea></div>' +
+          '</div>' +
+          '<div style="margin-top:18px;"><button type="submit" class="btn btn-primary">Send Request on WhatsApp 💬</button></div>' +
+          '<p id="booking-confirmation" style="display:none;margin-top:16px;padding:14px 16px;background:var(--sand-lt);border:1px solid var(--line);border-radius:var(--radius);font-size:.9rem;">Thanks — WhatsApp should have opened with your request pre-filled. Send it through and a Bonfire Adventures travel consultant will confirm availability, current pricing and booking details.</p>' +
+        '</form>' +
+      '</div>';
+
+    // Structured data for this property — only fields the record actually
+    // has; starRating/aggregateRating are omitted since that data is null
+    // for every hotel in the current catalogue (never fabricate a rating).
+    let ld = document.getElementById('ld-json');
+    if (!ld) { ld = document.createElement('script'); ld.type = 'application/ld+json'; ld.id = 'ld-json'; document.head.appendChild(ld); }
+    const ldData = {
+      "@context": "https://schema.org",
+      "@type": "LodgingBusiness",
+      "name": h.name,
+      "description": h.description,
+      "address": { "@type": "PostalAddress", "addressLocality": h.town, "addressRegion": h.region, "addressCountry": "KE" },
+      "image": "https://www.YOUR-LIVE-DOMAIN-HERE.com/" + h.image
+    };
+    if (h.price) {
+      ldData.priceRange = "KES " + h.price + " " + h.priceBasis;
+    }
+    ld.textContent = JSON.stringify(ldData);
+
+    Bonfire.initWhatsAppButtons();
+    Bonfire.initLazyBackgrounds();
+
+    document.getElementById('booking-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const name = document.getElementById('bf-name').value.trim();
+      const phone = document.getElementById('bf-phone').value.trim();
+      // At least one way to identify/contact the guest is required; every
+      // other field (including name or phone individually) is optional.
+      if (!name && !phone) return;
+      const checkin = document.getElementById('bf-checkin').value;
+      const checkout = document.getElementById('bf-checkout').value;
+      const adults = document.getElementById('bf-adults').value;
+      const children = document.getElementById('bf-children').value;
+      const room = document.getElementById('bf-room').value.trim();
+      const notes = document.getElementById('bf-notes').value.trim();
+
+      const lines = [];
+      if (name) lines.push('Name: ' + name);
+      if (phone) lines.push('Phone/WhatsApp: ' + phone);
+      if (checkin || checkout) lines.push('Dates: ' + (checkin || '?') + ' to ' + (checkout || '?'));
+      lines.push('Guests: ' + adults + ' adult' + (adults === '1' ? '' : 's') + (Number(children) > 0 ? ', ' + children + ' child' + (children === '1' ? '' : 'ren') : ''));
+      if (room) lines.push('Room preference: ' + room);
+      if (notes) lines.push('Special requests: ' + notes);
+
+      window.open(Bonfire.buildWhatsAppLink({
+        product: h.name,
+        destination: h.town,
+        custom: lines.join('\n')
+      }), '_blank', 'noopener');
+
+      document.getElementById('booking-confirmation').style.display = 'block';
+      e.target.querySelector('button[type=submit]').setAttribute('disabled', 'true');
+    });
+  }
+
+  if (id) {
+    const h = BONFIRE_DATA.getHotelById(id);
+    if (h) renderDetail(h);
+    else {
+      document.getElementById('detail-view').hidden = false;
+      document.getElementById('list-view').hidden = true;
+      document.getElementById('detail-content').innerHTML = Bonfire.emptyStateHTML({ title: 'Property not found', altHref: 'hotels.html', altLabel: 'Search hotels & B&Bs' });
+    }
+  } else {
+    renderRegionGrid();
+    renderTowns();
+    applyFilters();
+  }
+})();
+</script>
+</body>
+</html>

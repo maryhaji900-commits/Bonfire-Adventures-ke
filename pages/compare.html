@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compare — Bonfire Adventures</title>
+<meta name="description" content="Compare up to four Bonfire Adventures packages or hotels side by side — price, duration, inclusions, amenities and rating.">
+<link rel="canonical" href="https://www.YOUR-LIVE-DOMAIN-HERE.com/pages/compare.html">
+<meta property="og:title" content="Compare — Bonfire Adventures">
+<meta property="og:description" content="Compare up to four Bonfire Adventures packages or hotels side by side — price, duration, inclusions, amenities and rating.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.YOUR-LIVE-DOMAIN-HERE.com/pages/compare.html">
+<meta property="og:image" content="https://www.YOUR-LIVE-DOMAIN-HERE.com/assets/images/hero/coast-04-villa.jpg">
+<meta property="og:site_name" content="Bonfire Adventures">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Compare — Bonfire Adventures">
+<meta name="twitter:description" content="Compare up to four Bonfire Adventures packages or hotels side by side — price, duration, inclusions, amenities and rating.">
+<meta name="twitter:image" content="https://www.YOUR-LIVE-DOMAIN-HERE.com/assets/images/hero/coast-04-villa.jpg">
+<link rel="stylesheet" href="../styles.css?v=2">
+<link rel="icon" type="image/svg+xml" href="../assets/logos/bonfire-logo.svg">
+</head>
+<body id="page-compare">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="../index.html"><img src="../assets/logos/bonfire-logo.svg" alt="Bonfire Adventures logo" class="brand-logo"> Bonfire Adventures</a>
+    <nav class="main-nav" aria-label="Primary">
+      <a href="destinations.html">Destinations</a>
+      <a href="packages.html">Packages</a>
+      <a href="hotels.html">Hotels &amp; B&amp;Bs</a>
+      <a href="deals.html">Deals</a>
+      <span class="nav-divider" aria-hidden="true"></span>
+      <a href="compare.html" class="nav-secondary is-active">Compare <span class="compare-badge" data-compare-count>0</span></a>
+      <a href="contact.html" class="nav-secondary">Contact</a>
+      <div class="header-search header-search--mobile">
+        <input type="search" placeholder="Search Kenya…" aria-label="Global search" data-global-search>
+        <div class="gs-results" hidden data-global-search-results></div>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <div class="header-search">
+        <input type="search" placeholder="Search Kenya…" aria-label="Global search" data-global-search>
+        <div class="gs-results" hidden data-global-search-results></div>
+      </div>
+      <a class="btn btn-whatsapp btn-sm" data-whatsapp data-message="Hi, I'd like to speak with a Travel Advisor." target="_blank" rel="noopener"><span class="long">Advisor</span> 💬</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-hero">
+    <div class="container">
+      <div class="breadcrumbs" style="color:rgba(250,247,239,.7);"><a href="../index.html" style="color:rgba(250,247,239,.9);">Home</a> / Compare</div>
+      <h1>Compare</h1>
+      <p>Add up to 4 packages or hotels/B&amp;Bs from any page using "Add to Compare", then review them side by side here.</p>
+    </div>
+  </div>
+
+  <div class="container section">
+    <div class="chip-row" style="margin-bottom:20px;">
+      <button class="btn btn-ghost btn-sm" id="clear-all">Clear All</button>
+      <a class="btn btn-outline btn-sm" href="packages.html">+ Add packages</a>
+      <a class="btn btn-outline btn-sm" href="hotels.html">+ Add hotels &amp; B&amp;Bs</a>
+    </div>
+    <div id="compare-wrap"></div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© <span data-year></span> Bonfire Adventures. All rights reserved. Prices shown are indicative and confirmed by a Travel Advisor before booking.</span>
+      <a href="../index.html" style="color:rgba(250,247,239,.75);">Back to home</a>
+    </div>
+  </div>
+</footer>
+
+<a class="fab-whatsapp" data-whatsapp data-message="Hi, I'd like help choosing between a few options." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">💬</a>
+
+<script src="../data.js?v=2"></script>
+<script src="../script.js?v=2"></script>
+<script>
+(function () {
+  function itemFor(entry) {
+    return entry.type === 'package' ? BONFIRE_DATA.getPackageById(entry.id) : BONFIRE_DATA.getHotelById(entry.id);
+  }
+
+  function render() {
+    const list = Bonfire.getCompareList().map(function (e) { return { entry: e, item: itemFor(e) }; }).filter(function (x) { return x.item; });
+    const wrap = document.getElementById('compare-wrap');
+
+    if (!list.length) {
+      wrap.innerHTML = Bonfire.emptyStateHTML({ icon: '🔍', title: 'Nothing to compare yet', text: 'Browse Packages or Hotels & B&Bs and tap "Add to Compare" on up to 4 items.', altHref: 'packages.html', altLabel: 'Browse packages' });
+      return;
+    }
+
+    const packages = list.filter(function (x) { return x.entry.type === 'package'; });
+    const hotels = list.filter(function (x) { return x.entry.type === 'hotel'; });
+
+    let html = '';
+    if (packages.length) html += renderTable('Packages', packages, packageRows);
+    if (hotels.length) html += renderTable('Hotels & B&Bs', hotels, hotelRows);
+    wrap.innerHTML = html;
+
+    document.querySelectorAll('[data-remove]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        Bonfire.removeFromCompare(btn.getAttribute('data-type'), btn.getAttribute('data-id'));
+        render();
+      });
+    });
+  }
+
+  function renderTable(title, items, rowsFn) {
+    const rows = rowsFn();
+    let html = '<h2>' + title + '</h2><div class="compare-table-wrap"><table class="compare-table"><thead><tr><th>Field</th>';
+    items.forEach(function (x) { html += '<th>' + x.item.name + '<br><button class="compare-remove" data-remove data-type="' + x.entry.type + '" data-id="' + x.entry.id + '">Remove</button></th>'; });
+    for (let i = items.length; i < 4; i++) html += '<th class="slot-empty">Empty slot</th>';
+    html += '</tr></thead><tbody>';
+    rows.forEach(function (row) {
+      html += '<tr><th>' + row.label + '</th>';
+      items.forEach(function (x) { html += '<td>' + row.value(x.item) + '</td>'; });
+      for (let i = items.length; i < 4; i++) html += '<td class="slot-empty">—</td>';
+      html += '</tr>';
+    });
+    html += '</tbody></table></div><br>';
+    return html;
+  }
+
+  function packageRows() {
+    return [
+      { label: 'Destination', value: function (p) { const d = BONFIRE_DATA.getDestinationById(p.destinationId); return d ? d.name : p.region; } },
+      { label: 'Duration', value: function (p) { return p.duration; } },
+      { label: 'Price', value: function (p) { return Bonfire.formatKES(p.price) + ' ' + p.priceBasis; } },
+      { label: 'Accommodation', value: function (p) { return p.accommodation; } },
+      { label: 'Transport', value: function (p) { return p.transport; } },
+      { label: 'Meals', value: function (p) { return p.meals; } },
+      { label: 'Inclusions', value: function (p) { return p.inclusions.join(', '); } },
+      { label: 'Exclusions', value: function (p) { return p.exclusions.join(', '); } },
+      { label: 'Rating', value: function (p) { return '★ ' + p.rating + ' (' + p.reviewCount + ')'; } },
+      { label: '', value: function (p) { return '<a class="btn btn-primary btn-sm" href="packages.html?id=' + p.id + '">View / Select</a>'; } }
+    ];
+  }
+
+  function hotelRows() {
+    return [
+      { label: 'Location', value: function (h) { return h.town + ', ' + h.region; } },
+      { label: 'Price', value: function (h) { return h.price ? (Bonfire.formatKES(h.price) + ' ' + h.priceBasis) : 'Check Availability'; } },
+      { label: 'Type', value: function (h) { return h.accommodationType; } },
+      { label: 'Board basis', value: function (h) { return h.boardBasis || 'Not specified'; } },
+      { label: 'Amenities', value: function (h) { return (h.amenities || []).join(', '); } },
+      { label: 'Cancellation policy', value: function () { return 'Standard — confirm with Advisor'; } },
+      { label: 'Availability', value: function (h) { return h.availabilityStatus; } },
+      { label: '', value: function (h) { return '<a class="btn btn-primary btn-sm" href="hotels.html?id=' + h.id + '">View / Select</a>'; } }
+    ];
+  }
+
+  document.getElementById('clear-all').addEventListener('click', function () { Bonfire.clearCompare(); render(); });
+  render();
+})();
+</script>
+</body>
+</html>

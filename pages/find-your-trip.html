@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find Your Trip — Bonfire Adventures</title>
+<meta name="description" content="Tell us your destination, experience, budget, dates and travellers — Bonfire Adventures matches you to the right Kenya trip instantly.">
+<link rel="canonical" href="https://www.YOUR-LIVE-DOMAIN-HERE.com/pages/find-your-trip.html">
+<meta property="og:title" content="Find Your Trip — Bonfire Adventures">
+<meta property="og:description" content="Tell us your destination, experience, budget, dates and travellers — Bonfire Adventures matches you to the right Kenya trip instantly.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.YOUR-LIVE-DOMAIN-HERE.com/pages/find-your-trip.html">
+<meta property="og:image" content="https://www.YOUR-LIVE-DOMAIN-HERE.com/assets/images/hero/coast-01-camel.jpg">
+<meta property="og:site_name" content="Bonfire Adventures">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Find Your Trip — Bonfire Adventures">
+<meta name="twitter:description" content="Tell us your destination, experience, budget, dates and travellers — Bonfire Adventures matches you to the right Kenya trip instantly.">
+<meta name="twitter:image" content="https://www.YOUR-LIVE-DOMAIN-HERE.com/assets/images/hero/coast-01-camel.jpg">
+<link rel="stylesheet" href="../styles.css?v=2">
+<link rel="icon" type="image/svg+xml" href="../assets/logos/bonfire-logo.svg">
+</head>
+<body id="page-find-your-trip">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="../index.html"><img src="../assets/logos/bonfire-logo.svg" alt="Bonfire Adventures logo" class="brand-logo"> Bonfire Adventures</a>
+    <nav class="main-nav" aria-label="Primary">
+      <a href="destinations.html">Destinations</a>
+      <a href="packages.html">Packages</a>
+      <a href="hotels.html">Hotels &amp; B&amp;Bs</a>
+      <a href="deals.html">Deals</a>
+      <span class="nav-divider" aria-hidden="true"></span>
+      <a href="compare.html" class="nav-secondary">Compare <span class="compare-badge" data-compare-count>0</span></a>
+      <a href="contact.html" class="nav-secondary">Contact</a>
+      <div class="header-search header-search--mobile">
+        <input type="search" placeholder="Search Kenya…" aria-label="Global search" data-global-search>
+        <div class="gs-results" hidden data-global-search-results></div>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <div class="header-search">
+        <input type="search" placeholder="Search Kenya…" aria-label="Global search" data-global-search>
+        <div class="gs-results" hidden data-global-search-results></div>
+      </div>
+      <a class="btn btn-whatsapp btn-sm" data-whatsapp data-message="Hi, I'd like to speak with a Travel Advisor." target="_blank" rel="noopener"><span class="long">Advisor</span> 💬</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-hero has-photo" style="--hero-photo:url('../assets/images/destinations/diani/diani-1.jpg');">
+    <div class="container">
+      <div class="breadcrumbs" style="color:rgba(250,247,239,.7);"><a href="../index.html" style="color:rgba(250,247,239,.9);">Home</a> / Find Your Trip</div>
+      <h1>Find Your Trip</h1>
+      <p>Answer a few questions and we'll match you against the same inventory as Packages, Deals and Destinations.</p>
+    </div>
+  </div>
+
+  <div class="container" style="margin-top:20px;">
+    <div class="notice-banner">
+      This guided finder now lives inside <a href="packages.html">Packages</a>, <a href="hotels.html">Hotels &amp; B&amp;Bs</a> and <a href="destinations.html">Destinations</a> — each has the same destination, budget and experience filters built in. This page still works and is kept for anyone with it bookmarked.
+    </div>
+  </div>
+
+  <div class="container section">
+    <form id="finder-form" class="filters filters--inline" style="position:static;margin-bottom:32px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:end;">
+      <div class="form-field">
+        <label for="ft-dest">Destination</label>
+        <select id="ft-dest"><option value="">Anywhere</option></select>
+      </div>
+      <div class="form-field">
+        <label for="ft-exp">Experience</label>
+        <select id="ft-exp"><option value="">Any</option></select>
+      </div>
+      <div class="form-field">
+        <label for="ft-budget">Budget</label>
+        <select id="ft-budget"><option value="">Any budget</option></select>
+      </div>
+      <div class="form-field">
+        <label for="ft-duration">Duration</label>
+        <select id="ft-duration">
+          <option value="">Any duration</option>
+          <option value="day">Day trip</option>
+          <option value="1-2">1–2 nights</option>
+          <option value="3-4">3–4 nights</option>
+          <option value="5+">5+ nights</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label for="ft-dates">Travel dates</label>
+        <input type="date" id="ft-dates">
+      </div>
+      <div class="form-field">
+        <label for="ft-travellers">Number of travellers</label>
+        <input type="number" id="ft-travellers" min="1" value="2">
+      </div>
+      <div class="form-field">
+        <label for="ft-type">Traveller type</label>
+        <select id="ft-type">
+          <option value="">Any</option>
+          <option>Solo</option><option>Couples</option><option>Family</option><option>Group</option><option>Corporate</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <button class="btn btn-primary" type="submit" style="width:100%;justify-content:center;">Match my trip</button>
+      </div>
+    </form>
+
+    <div data-booking-banner></div>
+    <div data-honeymoon-banner></div>
+
+    <div class="section-head">
+      <p id="ft-count" style="margin:0;font-size:.9rem;color:rgba(22,36,28,.6);"></p>
+    </div>
+    <p id="ft-note" style="margin:-6px 0 16px;font-size:.86rem;color:rgba(22,36,28,.65);"></p>
+    <div class="card-grid" data-finder-results></div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© <span data-year></span> Bonfire Adventures. All rights reserved. Prices shown are indicative and confirmed by a Travel Advisor before booking.</span>
+      <a href="../index.html" style="color:rgba(250,247,239,.75);">Back to home</a>
+    </div>
+  </div>
+</footer>
+
+<a class="fab-whatsapp" data-whatsapp data-message="Hi, I'd like help planning a trip." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">💬</a>
+
+<script src="../data.js?v=2"></script>
+<script src="../script.js?v=2"></script>
+<script>
+(function () {
+  const params = new URLSearchParams(location.search);
+
+  function populateSelect(sel, items, valueFn, labelFn) {
+    items.forEach(function (i) {
+      const o = document.createElement('option');
+      o.value = valueFn(i); o.textContent = labelFn(i);
+      sel.appendChild(o);
+    });
+  }
+  populateSelect(document.getElementById('ft-dest'), BONFIRE_DATA.DESTINATIONS, function (d) { return d.id; }, function (d) { return d.name; });
+  populateSelect(document.getElementById('ft-exp'), BONFIRE_DATA.EXPERIENCES, function (e) { return e; }, function (e) { return e; });
+  populateSelect(document.getElementById('ft-budget'), BONFIRE_DATA.BUDGET_BANDS, function (b) { return b.id; }, function (b) { return b.label; });
+
+  if (params.get('destination')) document.getElementById('ft-dest').value = params.get('destination');
+  if (params.get('experience')) document.getElementById('ft-exp').value = params.get('experience');
+  if (params.get('budget')) document.getElementById('ft-budget').value = params.get('budget');
+
+  // Handoff from a package detail page's "Request Booking" button — carries
+  // the product name in the URL. We surface it here (instead of silently
+  // dropping it) and try to pre-fill the finder from the matching package,
+  // since Find Your Trip has no booking form of its own to receive it.
+  const bookingProduct = params.get('bookingProduct');
+  if (bookingProduct) {
+    const matched = BONFIRE_DATA.PACKAGES.find(function (p) { return p.name === bookingProduct; });
+    if (matched) {
+      document.getElementById('ft-dest').value = matched.destinationId;
+      if (matched.experiences && matched.experiences[0]) document.getElementById('ft-exp').value = matched.experiences[0];
+    }
+    document.querySelector('[data-booking-banner]').innerHTML =
+      '<div class="empty-state" style="text-align:left;padding:18px 20px;margin-bottom:24px;">' +
+        '<p style="margin:0 0 10px;"><strong>Continuing your booking:</strong> ' + bookingProduct + '</p>' +
+        '<a class="btn btn-primary btn-sm" data-whatsapp data-product="' + bookingProduct + '" data-message="I would like to book this trip." target="_blank" rel="noopener" data-analytics="booking-start">Continue on WhatsApp</a>' +
+      '</div>';
+    Bonfire.initWhatsAppButtons();
+    Bonfire.initLazyBackgrounds();
+  }
+
+  function durationMatch(pkg, key) {
+    if (!key) return true;
+    const d = pkg.duration.toLowerCase();
+    if (key === 'day') return d.indexOf('1 day') !== -1 && d.indexOf('night') === -1;
+    if (key === '1-2') return /1 night|2 nights?/.test(d);
+    if (key === '3-4') return /3 nights?|4 nights?/.test(d);
+    if (key === '5+') return /[5-9] nights?/.test(d);
+    return true;
+  }
+
+  // Scored matching: every filled-in preference is one "criterion". A trip's
+  // match % is how many of those criteria it satisfies. Nothing is hidden
+  // outright unless the user filled in zero preferences with zero matches —
+  // instead low scorers just sort to the bottom, so a close alternative is
+  // always visible rather than a dead end.
+  // "Honeymoon" gets one exception: a trip tagged "Romance" (but not
+  // "Honeymoon") counts as a partial match on that one criterion, since
+  // Bonfire's romance-tagged trips are genuinely honeymoon-suitable even
+  // when not labelled as such — this only ever adds candidates, never
+  // invents new ones.
+  function scoreTrip(p, prefs) {
+    let total = 0, hit = 0;
+    if (prefs.dest) { total++; if (p.destinationId === prefs.dest) hit++; }
+    if (prefs.exp) {
+      total++;
+      if (p.experiences.indexOf(prefs.exp) !== -1) hit++;
+      else if (prefs.exp === 'Honeymoon' && p.experiences.indexOf('Romance') !== -1) hit += 0.6;
+    }
+    if (prefs.budget) { total++; if (p.budgetBand === prefs.budget) hit++; }
+    if (prefs.type) { total++; if (p.travellerType.indexOf(prefs.type) !== -1) hit++; }
+    if (prefs.duration) { total++; if (durationMatch(p, prefs.duration)) hit++; }
+    if (total === 0) return 100;
+    return Math.round((hit / total) * 100);
+  }
+
+  function matchCardHTML(pkg, score, showScore) {
+    const cardHTML = Bonfire.packageCardHTML(pkg);
+    if (!showScore) return cardHTML;
+    const badge = '<span class="badge" style="position:absolute;top:12px;right:12px;left:auto;background:var(--teal);color:#fff;">' + score + '% match</span>';
+    // Insert the match badge into the card-media element (the only
+    // positioned ancestor in the existing card markup) right after its
+    // opening tag, so it sits correctly without any CSS changes.
+    return cardHTML.replace(/(<div class="card-media"[^>]*>)/, '$1' + badge);
+  }
+
+  function runSearch() {
+    const prefs = {
+      dest: document.getElementById('ft-dest').value,
+      exp: document.getElementById('ft-exp').value,
+      budget: document.getElementById('ft-budget').value,
+      duration: document.getElementById('ft-duration').value,
+      type: document.getElementById('ft-type').value
+    };
+    const anyPref = prefs.dest || prefs.exp || prefs.budget || prefs.duration || prefs.type;
+
+    const honeymoonBanner = document.querySelector('[data-honeymoon-banner]');
+    if (prefs.exp === 'Honeymoon') {
+      honeymoonBanner.innerHTML =
+        '<div class="empty-state" style="text-align:left;padding:18px 20px;margin-bottom:24px;">' +
+          '<p style="margin:0;"><strong>Planning a honeymoon?</strong> We\'ve widened this search to include our Romance-tagged trips too — private dinners, couples spa time and quiet Coast &amp; safari stays — not just ones labelled "Honeymoon".</p>' +
+        '</div>';
+    } else {
+      honeymoonBanner.innerHTML = '';
+    }
+
+    const scored = BONFIRE_DATA.PACKAGES
+      .map(function (p) { return { pkg: p, score: scoreTrip(p, prefs) }; })
+      .sort(function (a, b) { return b.score - a.score || b.pkg.rating - a.pkg.rating; });
+
+    const wrap = document.querySelector('[data-finder-results]');
+    const countEl = document.getElementById('ft-count');
+    const noteEl = document.getElementById('ft-note');
+
+    if (!anyPref) {
+      countEl.textContent = scored.length + ' trips available';
+      noteEl.textContent = 'Set a preference above to see how closely each trip matches, or browse everything below.';
+      wrap.innerHTML = scored.map(function (s) { return matchCardHTML(s.pkg, s.score, false); }).join('');
+      Bonfire.initWhatsAppButtons();
+      Bonfire.initLazyBackgrounds();
+      return;
+    }
+
+    const exact = scored.filter(function (s) { return s.score === 100; });
+    const close = scored.filter(function (s) { return s.score > 0 && s.score < 100; }).slice(0, 8);
+
+    if (exact.length) {
+      countEl.textContent = 'We found ' + exact.length + ' trip' + (exact.length === 1 ? '' : 's') + ' for you';
+      noteEl.textContent = '';
+      wrap.innerHTML = exact.map(function (s) { return matchCardHTML(s.pkg, s.score, true); }).join('');
+    } else if (close.length) {
+      countEl.textContent = 'No exact match — here are the closest trips';
+      noteEl.textContent = 'We couldn\'t find an exact match, but these trips are close to your preferences.';
+      wrap.innerHTML = close.map(function (s) { return matchCardHTML(s.pkg, s.score, true); }).join('');
+    } else {
+      countEl.textContent = '0 trips match your search';
+      noteEl.textContent = '';
+      wrap.innerHTML = Bonfire.emptyStateHTML({
+        title: 'No trips found for those preferences',
+        text: 'Widen your budget or duration, choose "Anywhere", or let an Advisor build something custom around your answers.',
+        altHref: 'packages.html', altLabel: 'Browse all packages',
+        waMessage: 'Hi, none of the listed trips matched what I want — can you help plan a custom trip?'
+      });
+    }
+    Bonfire.initWhatsAppButtons();
+    Bonfire.initLazyBackgrounds();
+  }
+
+  document.getElementById('finder-form').addEventListener('submit', function (e) { e.preventDefault(); runSearch(); });
+  runSearch();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Packages — Bonfire Adventures</title>
+<meta name="description" content="Browse the full Bonfire Adventures package catalogue. Filter by destination, region, experience, budget, duration and traveller type.">
+<link rel="canonical" href="https://www.YOUR-LIVE-DOMAIN-HERE.com/pages/packages.html">
+<meta property="og:title" content="Packages — Bonfire Adventures">
+<meta property="og:description" content="Browse the full Bonfire Adventures package catalogue. Filter by destination, region, experience, budget, duration and traveller type.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.YOUR-LIVE-DOMAIN-HERE.com/pages/packages.html">
+<meta property="og:image" content="https://www.YOUR-LIVE-DOMAIN-HERE.com/assets/images/hero/coast-02-palms-beach.jpg">
+<meta property="og:site_name" content="Bonfire Adventures">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Packages — Bonfire Adventures">
+<meta name="twitter:description" content="Browse the full Bonfire Adventures package catalogue. Filter by destination, region, experience, budget, duration and traveller type.">
+<meta name="twitter:image" content="https://www.YOUR-LIVE-DOMAIN-HERE.com/assets/images/hero/coast-02-palms-beach.jpg">
+<link rel="stylesheet" href="../styles.css?v=2">
+<link rel="icon" type="image/svg+xml" href="../assets/logos/bonfire-logo.svg">
+</head>
+<body id="page-packages">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="../index.html"><img src="../assets/logos/bonfire-logo.svg" alt="Bonfire Adventures logo" class="brand-logo"> Bonfire Adventures</a>
+    <nav class="main-nav" aria-label="Primary">
+      <a href="destinations.html">Destinations</a>
+      <a href="packages.html">Packages</a>
+      <a href="hotels.html">Hotels &amp; B&amp;Bs</a>
+      <a href="deals.html">Deals</a>
+      <span class="nav-divider" aria-hidden="true"></span>
+      <a href="compare.html" class="nav-secondary">Compare <span class="compare-badge" data-compare-count>0</span></a>
+      <a href="contact.html" class="nav-secondary">Contact</a>
+      <div class="header-search header-search--mobile">
+        <input type="search" placeholder="Search Kenya…" aria-label="Global search" data-global-search>
+        <div class="gs-results" hidden data-global-search-results></div>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <div class="header-search">
+        <input type="search" placeholder="Search Kenya…" aria-label="Global search" data-global-search>
+        <div class="gs-results" hidden data-global-search-results></div>
+      </div>
+      <a class="btn btn-whatsapp btn-sm" data-whatsapp data-message="Hi, I'd like to speak with a Travel Advisor." target="_blank" rel="noopener"><span class="long">Advisor</span> 💬</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-hero has-photo" style="--hero-photo:url('../assets/images/packages/maasai-mara-migration-safari.jpg');">
+    <div class="container">
+      <div class="breadcrumbs" style="color:rgba(250,247,239,.7);"><a href="../index.html" style="color:rgba(250,247,239,.9);">Home</a> / Packages</div>
+      <h1 id="page-title">Packages</h1>
+      <p id="page-sub">Safaris, beach holidays, honeymoons and group trips — all from one Bonfire inventory.</p>
+    </div>
+  </div>
+
+  <div class="container section" id="list-view">
+    <div class="layout-split">
+      <aside class="filters" aria-label="Filter packages">
+        <h4>Destination</h4>
+        <div class="filter-group"><select id="f-destination" data-analytics="filter-destination"><option value="">All destinations</option></select></div>
+        <h4>Budget</h4>
+        <div class="filter-group"><select id="f-budget"><option value="">Any budget</option></select></div>
+        <h4>Duration</h4>
+        <div class="filter-group"><select id="f-duration">
+          <option value="">Any duration</option>
+          <option value="day">Day trip</option>
+          <option value="1-2">1–2 nights</option>
+          <option value="3-4">3–4 nights</option>
+          <option value="5+">5+ nights</option>
+        </select></div>
+        <h4>Traveller Type</h4>
+        <div class="filter-group"><select id="f-traveller">
+          <option value="">Anyone</option>
+          <option value="Solo">Solo</option>
+          <option value="Couples">Couples</option>
+          <option value="Family">Family</option>
+          <option value="Group">Group</option>
+          <option value="Corporate">Corporate</option>
+        </select></div>
+        <button class="btn btn-ghost btn-sm" id="f-clear" style="width:100%;justify-content:center;">Clear filters</button>
+      </aside>
+
+      <div>
+        <div class="section-head" style="margin-bottom:16px;">
+          <p id="result-count" style="margin:0;font-size:.9rem;color:rgba(22,36,28,.6);"></p>
+        </div>
+        <div class="card-grid" data-package-results></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container section" id="detail-view" hidden>
+    <div class="breadcrumbs"><a href="../index.html">Home</a> / <a href="packages.html">Packages</a> / <span data-detail-crumb></span></div>
+    <div id="detail-content"></div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© <span data-year></span> Bonfire Adventures. All rights reserved. Prices shown are indicative and confirmed by a Travel Advisor before booking.</span>
+      <a href="../index.html" style="color:rgba(250,247,239,.75);">Back to home</a>
+    </div>
+  </div>
+</footer>
+
+<a class="fab-whatsapp" data-whatsapp data-message="Hi, I'd like help planning a trip." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">💬</a>
+
+<script src="../data.js?v=2"></script>
+<script src="../script.js?v=2"></script>
+<script>
+(function () {
+  const params = new URLSearchParams(location.search);
+  const id = params.get('id');
+
+  function populateSelect(sel, items, valueFn, labelFn) {
+    items.forEach(function (i) {
+      const o = document.createElement('option');
+      o.value = valueFn(i); o.textContent = labelFn(i);
+      sel.appendChild(o);
+    });
+  }
+
+  populateSelect(document.getElementById('f-destination'), BONFIRE_DATA.DESTINATIONS, function (d) { return d.id; }, function (d) { return d.name; });
+  populateSelect(document.getElementById('f-budget'), BONFIRE_DATA.BUDGET_BANDS, function (b) { return b.id; }, function (b) { return b.label; });
+
+  function durationMatch(pkg, key) {
+    if (!key) return true;
+    const d = pkg.duration.toLowerCase();
+    if (key === 'day') return d.indexOf('1 day') !== -1 && d.indexOf('night') === -1;
+    if (key === '1-2') return /1 night|2 nights?/.test(d);
+    if (key === '3-4') return /3 nights?|4 nights?/.test(d);
+    if (key === '5+') return /[5-9] nights?|\d{2}\+? nights?/.test(d);
+    return true;
+  }
+
+  function applyFilters() {
+    const dest = document.getElementById('f-destination').value;
+    const budget = document.getElementById('f-budget').value;
+    const duration = document.getElementById('f-duration').value;
+    const traveller = document.getElementById('f-traveller').value;
+
+    const results = BONFIRE_DATA.PACKAGES.filter(function (p) {
+      if (dest && p.destinationId !== dest) return false;
+      if (budget && p.budgetBand !== budget) return false;
+      if (traveller && p.travellerType.indexOf(traveller) === -1) return false;
+      if (!durationMatch(p, duration)) return false;
+      return true;
+    });
+
+    const resultWrap = document.querySelector('[data-package-results]');
+    document.getElementById('result-count').textContent = results.length + ' package' + (results.length === 1 ? '' : 's') + ' found';
+    resultWrap.innerHTML = results.length
+      ? results.map(Bonfire.packageCardHTML).join('')
+      : Bonfire.emptyStateHTML({ title: 'No packages match those filters', text: 'Try widening your destination, budget or dates — or ask an Advisor to build something custom.', altHref: 'javascript:document.getElementById(\'f-clear\').click()', altLabel: 'Clear filters' });
+    Bonfire.initWhatsAppButtons();
+    Bonfire.initLazyBackgrounds();
+  }
+
+  function renderDetail(pkg) {
+    const dest = BONFIRE_DATA.getDestinationById(pkg.destinationId);
+    const img = dest && dest.images && dest.images[0] ? dest.images[0].src : '';
+    const isIntl = pkg.flightsIncluded !== undefined;
+    // Nearby Accommodation: same logic as the Destination detail page —
+    // hotels tied to this package's destination, falling back to the
+    // destination's region when none are directly associated.
+    let nearbyHotels = BONFIRE_DATA.HOTELS.filter(function (h) { return h.destination === pkg.destinationId; }).slice(0, 3);
+    if (!nearbyHotels.length && dest) nearbyHotels = BONFIRE_DATA.HOTELS.filter(function (h) { return h.region === dest.region; }).slice(0, 3);
+    document.getElementById('page-title').textContent = pkg.name;
+    document.getElementById('page-sub').textContent = pkg.desc;
+    document.querySelector('[data-detail-crumb]').textContent = pkg.name;
+    document.title = pkg.name + ' — Bonfire Adventures';
+    document.getElementById('list-view').hidden = true;
+    document.getElementById('detail-view').hidden = false;
+
+    const allInclusive = pkg.accommodationIncluded === true;
+    const priceLabel = pkg.price == null
+      ? '<span class="price-on-request">PRICE ON REQUEST</span>'
+      : (pkg.startingFrom ? 'Starting from ' : '') + Bonfire.formatKES(pkg.price) + ' <small>' + pkg.priceBasis + (pkg.pricedForDuration ? ' &middot; priced for ' + pkg.pricedForDuration : '') + '</small>';
+
+    document.getElementById('detail-content').innerHTML =
+      '<div class="layout-split">' +
+        '<div style="grid-column:1/-1;display:grid;grid-template-columns:1.3fr 1fr;gap:32px;">' +
+          '<div>' +
+            '<div class="card-media"' + (img ? ' data-bg="../' + img + '"' : '') + ' style="aspect-ratio:16/9;border-radius:var(--radius);margin-bottom:20px;">' +
+              '<span class="badge">' + pkg.duration + '</span><span class="rating">★ ' + pkg.rating + ' (' + pkg.reviewCount + ' reviews)</span>' +
+            '</div>' +
+            '<h2>Overview</h2><p>' + pkg.desc + '</p>' +
+            (pkg.activities && pkg.activities.length ? '<h3>Things to do</h3><ul style="list-style:disc;padding-left:20px;margin-bottom:16px;">' + pkg.activities.map(function (i) { return '<li>' + i + '</li>'; }).join('') + '</ul>' : '') +
+            (isIntl ? '<div class="flight-visa-badges" style="margin-bottom:16px;">' +
+              '<span class="' + (pkg.flightsIncluded ? 'fv-yes' : 'fv-no') + '">Flights ' + (pkg.flightsIncluded ? 'included' : 'excluded') + '</span>' +
+              '<span class="' + (pkg.visaIncluded ? 'fv-yes' : 'fv-no') + '">Visa ' + (pkg.visaIncluded ? 'included' : 'excluded') + '</span>' +
+            '</div>' : '') +
+            '<div class="included-grid">' +
+              '<div class="included-col included-col--yes"><h3>✅ Amenities &amp; What\'s Included</h3><ul>' + pkg.inclusions.map(function (i) { return '<li>' + i + '</li>'; }).join('') + '</ul></div>' +
+            '</div>' +
+            (allInclusive
+              ? '<p class="price-final-note">Prices for this package are all-inclusive — covering travel, visa, accommodation and other arrangements. Talk to a Travel Advisor to confirm booking details.</p>'
+              : '<p class="price-final-note">This price covers travel, activities and other arrangements. Once you select a hotel below, your final quote will include the whole package — accommodation and everything else — with no extra costs incurred.</p>') +
+            '<div class="card-tags">' + pkg.experiences.map(function (t) { return '<span>' + t + '</span>'; }).join('') + '</div>' +
+          '</div>' +
+          '<aside class="filters" style="position:sticky;top:92px;">' +
+            '<div class="price" style="font-size:1.4rem;margin-bottom:4px;">' + priceLabel + '</div>' +
+            '<p style="font-size:.85rem;color:rgba(22,36,28,.6);margin-bottom:16px;">' + (pkg.price == null ? 'No confirmed rate yet — a Travel Advisor will quote current pricing.' : 'Indicative pricing — request a quote to confirm live rates.') + '</p>' +
+            '<p style="font-size:.86rem;"><strong>Destination:</strong> ' + (dest ? dest.name : pkg.region) + '</p>' +
+            '<p style="font-size:.86rem;"><strong>Transport:</strong> ' + pkg.transport + '</p>' +
+            '<p style="font-size:.86rem;"><strong>Meals:</strong> ' + pkg.meals + '</p>' +
+            (allInclusive
+              ? '<a class="btn btn-whatsapp" style="width:100%;justify-content:center;margin-top:12px;" data-whatsapp data-message="Hi, I\'d like to book the ' + pkg.name + ' package. Please help me confirm my flight and visa arrangements." target="_blank" rel="noopener" data-analytics="request-quote">Talk to Travel Advisor to Book</a>'
+              : '<button type="button" class="btn btn-whatsapp" style="width:100%;justify-content:center;margin-top:12px;" id="btn-choose-hotel">Choose Your Hotel</button>') +
+            '<a class="btn btn-outline" style="width:100%;justify-content:center;margin-top:10px;" href="contact.html">Enquire by Form</a>' +
+          '</aside>' +
+        '</div>' +
+      '</div>' +
+      (allInclusive ? '' :
+      '<div style="margin-top:44px;" id="hotel-select-section">' +
+        '<h2>Step 1 — Choose Your Hotel</h2>' +
+        '<p style="color:rgba(22,36,28,.6);">Pick a hotel for your stay in ' + (dest ? dest.name : pkg.region) + ', or let your Travel Advisor choose one for you.</p>' +
+        (nearbyHotels.length
+          ? '<div class="card-grid" data-hotel-select-grid>' + nearbyHotels.map(function (h) {
+              return '<div class="hotel-select-card" data-hotel-choice=\'' + JSON.stringify({ id: h.id, name: h.name, price: h.price }).replace(/'/g, "&#39;") + '\'>' + Bonfire.hotelCardHTML(h) +
+                '<button type="button" class="btn btn-outline btn-sm hotel-pick-btn" style="width:100%;justify-content:center;margin-top:8px;">Select This Hotel</button></div>';
+            }).join('') + '</div>'
+          : '<p style="color:rgba(22,36,28,.6);">No accommodation indexed for this destination yet — try the full Hotels &amp; B&amp;Bs search.</p>') +
+        '<button type="button" class="btn btn-ghost" style="margin-top:16px;" id="btn-advisor-hotel">Let my Travel Advisor choose a hotel for me</button>' +
+      '</div>' +
+      '<div style="margin-top:44px;display:none;" id="customer-details-section">' +
+        '<h2>Step 2 — Your Details</h2>' +
+        '<p id="selected-summary" style="font-weight:600;margin-bottom:16px;"></p>' +
+        '<form id="package-booking-form">' +
+          '<div class="form-grid">' +
+            '<div class="form-field"><label for="pf-name">Full Name</label><input type="text" id="pf-name"></div>' +
+            '<div class="form-field"><label for="pf-phone">Phone / WhatsApp</label><input type="tel" id="pf-phone"></div>' +
+            '<div class="form-field"><label for="pf-email">Email</label><input type="email" id="pf-email"></div>' +
+            '<div class="form-field"><label for="pf-group">Group Size</label><select id="pf-group">' +
+              '<option value="1 Person">1 Person</option>' +
+              '<option value="Couple (2)">Couple (2)</option>' +
+              '<option value="Group (5+)">Group (5+)</option>' +
+              '<option value="Group (10+)">Group (10+)</option>' +
+              '<option value="Group (15+)">More than 15</option>' +
+            '</select></div>' +
+            '<div class="form-field"><label for="pf-checkin">Check-in Date</label><input type="date" id="pf-checkin"></div>' +
+            '<div class="form-field"><label for="pf-checkout">Check-out Date</label><input type="date" id="pf-checkout"></div>' +
+            '<div class="form-field full"><label for="pf-notes">Special Requests</label><textarea id="pf-notes" rows="3"></textarea></div>' +
+          '</div>' +
+          '<a class="btn btn-whatsapp" style="width:100%;justify-content:center;margin-top:12px;" id="btn-send-whatsapp" target="_blank" rel="noopener" data-analytics="request-quote">Request Quote on WhatsApp</a>' +
+        '</form>' +
+      '</div>');
+    Bonfire.initWhatsAppButtons();
+    Bonfire.initLazyBackgrounds();
+
+    if (!allInclusive) {
+      let chosenHotel = null; // { id, name, price } or null (advisor chooses)
+      let advisorChoice = false;
+
+      function scrollToId(elId) { const el = document.getElementById(elId); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+
+      function computeNights() {
+        const checkin = document.getElementById('pf-checkin') ? document.getElementById('pf-checkin').value : '';
+        const checkout = document.getElementById('pf-checkout') ? document.getElementById('pf-checkout').value : '';
+        if (!checkin || !checkout) return null;
+        const d1 = new Date(checkin), d2 = new Date(checkout);
+        const diff = Math.round((d2 - d1) / (1000 * 60 * 60 * 24));
+        return diff > 0 ? diff : null;
+      }
+
+      function updateSummary() {
+        const summary = document.getElementById('selected-summary');
+        if (!summary) return;
+        const nights = computeNights();
+        if (advisorChoice) {
+          summary.textContent = 'Package: ' + pkg.name + ' — Hotel: Travel Advisor\'s choice';
+        } else if (chosenHotel) {
+          let text = 'Package: ' + pkg.name + ' — Hotel: ' + chosenHotel.name;
+          if (nights && chosenHotel.price != null && pkg.price != null) {
+            text += ' — ' + nights + ' night(s) — Estimated total: ' + Bonfire.formatKES(pkg.price + chosenHotel.price * nights);
+          } else {
+            text += ' — add check-in/check-out dates to see your estimated total';
+          }
+          summary.textContent = text;
+        }
+      }
+
+      function showDetailsStep() {
+        const section = document.getElementById('customer-details-section');
+        section.style.display = 'block';
+        updateSummary();
+        ['pf-checkin', 'pf-checkout'].forEach(function (fid) {
+          const el = document.getElementById(fid);
+          if (el) el.addEventListener('change', updateSummary);
+        });
+        setTimeout(function () { scrollToId('customer-details-section'); }, 50);
+      }
+
+      const chooseBtn = document.getElementById('btn-choose-hotel');
+      if (chooseBtn) chooseBtn.addEventListener('click', function () { scrollToId('hotel-select-section'); });
+
+      document.querySelectorAll('.hotel-pick-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          const card = btn.closest('[data-hotel-choice]');
+          const data = JSON.parse(card.getAttribute('data-hotel-choice').replace(/&#39;/g, "'"));
+          chosenHotel = data; advisorChoice = false;
+          showDetailsStep();
+        });
+      });
+
+      const advisorBtn = document.getElementById('btn-advisor-hotel');
+      if (advisorBtn) advisorBtn.addEventListener('click', function () {
+        advisorChoice = true; chosenHotel = null;
+        showDetailsStep();
+      });
+
+      const sendBtn = document.getElementById('btn-send-whatsapp');
+      if (sendBtn) sendBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        const name = document.getElementById('pf-name').value;
+        const phone = document.getElementById('pf-phone').value;
+        const email = document.getElementById('pf-email').value;
+        const group = document.getElementById('pf-group').value;
+        const checkin = document.getElementById('pf-checkin').value;
+        const checkout = document.getElementById('pf-checkout').value;
+        const notes = document.getElementById('pf-notes').value;
+
+        const customLines = [];
+        const nights = computeNights();
+
+        if (advisorChoice) {
+          customLines.push('Hotel: I would like my Travel Advisor to choose a hotel for me.');
+          customLines.push('Note: Final price will include accommodation once a hotel is confirmed by the Travel Advisor.');
+        } else if (chosenHotel) {
+          customLines.push('Hotel: ' + chosenHotel.name + (chosenHotel.price != null ? ' (' + Bonfire.formatKES(chosenHotel.price) + ' per night)' : ''));
+          if (nights && chosenHotel.price != null) {
+            const hotelTotal = chosenHotel.price * nights;
+            customLines.push('Nights: ' + nights + ' (' + Bonfire.formatKES(hotelTotal) + ' accommodation total)');
+            if (pkg.price != null) {
+              customLines.push('Estimated combined total (package + ' + nights + ' night(s) accommodation): ' + Bonfire.formatKES(pkg.price + hotelTotal));
+            }
+          } else if (pkg.price != null && chosenHotel.price != null) {
+            customLines.push('Estimated combined total (package + 1 night accommodation): ' + Bonfire.formatKES(pkg.price + chosenHotel.price) + ' — add check-in/check-out dates for an accurate multi-night total');
+          }
+        }
+        if (name) customLines.push('Name: ' + name);
+        if (phone) customLines.push('Phone: ' + phone);
+        if (email) customLines.push('Email: ' + email);
+        if (checkin) customLines.push('Check-in: ' + checkin);
+        if (checkout) customLines.push('Check-out: ' + checkout);
+        if (notes) customLines.push('Special requests: ' + notes);
+
+        const url = Bonfire.buildWhatsAppLink({
+          product: pkg.name + ' (' + (pkg.price != null ? 'from ' + Bonfire.formatKES(pkg.price) + ' ' + pkg.priceBasis : 'price on request') + ')',
+          destination: dest ? dest.name : pkg.region,
+          travellers: group,
+          custom: customLines.join('\n')
+        });
+        window.open(url, '_blank', 'noopener');
+      });
+    }
+
+    // Structured data for this specific package — real fields only
+    // (name, description, price, image); no ratings are emitted since
+    // review counts here are demo placeholders, not verified aggregate data.
+    let ld = document.getElementById('ld-json');
+    if (!ld) { ld = document.createElement('script'); ld.type = 'application/ld+json'; ld.id = 'ld-json'; document.head.appendChild(ld); }
+    ld.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "TouristTrip",
+      "name": pkg.name,
+      "description": pkg.desc,
+      "touristType": pkg.travellerType,
+      "offers": pkg.price != null ? {
+        "@type": "Offer",
+        "priceCurrency": "KES",
+        "price": pkg.price,
+        "availability": "https://schema.org/InStock",
+        "url": location.href
+      } : undefined
+    });
+  }
+
+  if (id) {
+    const pkg = BONFIRE_DATA.getPackageById(id);
+    if (pkg) {
+      renderDetail(pkg);
+    } else {
+      document.getElementById('detail-view').hidden = false;
+      document.getElementById('list-view').hidden = true;
+      document.getElementById('detail-content').innerHTML = Bonfire.emptyStateHTML({ title: 'Package not found', text: 'That package may have been renamed or removed.', altHref: 'packages.html', altLabel: 'Browse all packages' });
+    }
+  } else {
+    ['f-destination', 'f-budget', 'f-duration', 'f-traveller'].forEach(function (fid) {
+      document.getElementById(fid).addEventListener('change', applyFilters);
+    });
+    document.getElementById('f-clear').addEventListener('click', function () {
+      document.querySelectorAll('.filters select').forEach(function (s) { s.value = ''; });
+      applyFilters();
+    });
+    // allow deep link with pre-selected traveller type e.g. ?traveller=Group
+    const preTraveller = params.get('traveller');
+    if (preTraveller) {
+      const sel = document.getElementById('f-traveller');
+      if (sel && Array.from(sel.options).some(function (o) { return o.value === preTraveller; })) sel.value = preTraveller;
+    }
+    applyFilters();
+  }
+})();
+</script>
+</body>
+</html>

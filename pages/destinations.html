@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Destinations — Explore Kenya | Bonfire Adventures</title>
+<meta name="description" content="Explore Kenya's coast, safari country, lakes, highlands and cities — every destination connects to Bonfire's packages, hotels and deals.">
+<link rel="canonical" href="https://www.YOUR-LIVE-DOMAIN-HERE.com/pages/destinations.html">
+<meta property="og:title" content="Destinations — Explore Kenya | Bonfire Adventures">
+<meta property="og:description" content="Explore Kenya's coast, safari country, lakes, highlands and cities — every destination connects to Bonfire's packages, hotels and deals.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.YOUR-LIVE-DOMAIN-HERE.com/pages/destinations.html">
+<meta property="og:image" content="https://www.YOUR-LIVE-DOMAIN-HERE.com/assets/images/hero/lamu-03-oldtown.jpg">
+<meta property="og:site_name" content="Bonfire Adventures">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Destinations — Explore Kenya | Bonfire Adventures">
+<meta name="twitter:description" content="Explore Kenya's coast, safari country, lakes, highlands and cities — every destination connects to Bonfire's packages, hotels and deals.">
+<meta name="twitter:image" content="https://www.YOUR-LIVE-DOMAIN-HERE.com/assets/images/hero/lamu-03-oldtown.jpg">
+<link rel="stylesheet" href="../styles.css?v=2">
+<link rel="icon" type="image/svg+xml" href="../assets/logos/bonfire-logo.svg">
+</head>
+<body id="page-destinations">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="../index.html"><img src="../assets/logos/bonfire-logo.svg" alt="Bonfire Adventures logo" class="brand-logo"> Bonfire Adventures</a>
+    <nav class="main-nav" aria-label="Primary">
+      <a href="destinations.html">Destinations</a>
+      <a href="packages.html">Packages</a>
+      <a href="hotels.html">Hotels &amp; B&amp;Bs</a>
+      <a href="deals.html">Deals</a>
+      <span class="nav-divider" aria-hidden="true"></span>
+      <a href="compare.html" class="nav-secondary">Compare <span class="compare-badge" data-compare-count>0</span></a>
+      <a href="contact.html" class="nav-secondary">Contact</a>
+      <div class="header-search header-search--mobile">
+        <input type="search" placeholder="Search Kenya…" aria-label="Global search" data-global-search>
+        <div class="gs-results" hidden data-global-search-results></div>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <div class="header-search">
+        <input type="search" placeholder="Search Kenya…" aria-label="Global search" data-global-search>
+        <div class="gs-results" hidden data-global-search-results></div>
+      </div>
+      <a class="btn btn-whatsapp btn-sm" data-whatsapp data-message="Hi, I'd like to speak with a Travel Advisor." target="_blank" rel="noopener"><span class="long">Advisor</span> 💬</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-hero has-photo" style="--hero-photo:url('../assets/images/destinations/amboseli/amboseli-1.jpg');">
+    <div class="container">
+      <div class="breadcrumbs" style="color:rgba(250,247,239,.7);"><a href="../index.html" style="color:rgba(250,247,239,.9);">Home</a> / Destinations</div>
+      <h1 id="page-title">Explore Kenya</h1>
+      <p id="page-sub">Coast, safari country, lakes, highlands and cities — pick a category or a destination to start.</p>
+    </div>
+  </div>
+
+  <div class="container section" id="list-view">
+    <div class="continent-tabs" id="continent-tabs" role="tablist" aria-label="Browse by continent"></div>
+    <div class="chip-row" id="category-chips" style="margin-bottom:28px;"></div>
+    <div class="region-grid" data-destination-results style="grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));"></div>
+  </div>
+
+  <div class="container section" id="detail-view" hidden>
+    <div class="breadcrumbs"><a href="../index.html">Home</a> / <a href="destinations.html">Destinations</a> / <span data-detail-crumb></span></div>
+    <div id="detail-content"></div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© <span data-year></span> Bonfire Adventures. All rights reserved. Prices shown are indicative and confirmed by a Travel Advisor before booking.</span>
+      <a href="../index.html" style="color:rgba(250,247,239,.75);">Back to home</a>
+    </div>
+  </div>
+</footer>
+
+<a class="fab-whatsapp" data-whatsapp data-message="Hi, I'd like help planning a trip." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">💬</a>
+
+<script src="../data.js?v=2"></script>
+<script src="../script.js?v=2"></script>
+<script>
+(function () {
+  const params = new URLSearchParams(location.search);
+  const id = params.get('id');
+  let activeContinent = params.get('continent') || '';
+  let activeCategory = params.get('category') || '';
+
+  const CONTINENT_META = {
+    Kenya: { emoji: '🇰🇪', blurb: 'Coast, safari country, lakes, highlands and cities.' },
+    Africa: { emoji: '🌍', blurb: 'South Africa, Egypt and more — beyond Kenya\u2019s borders.' },
+    International: { emoji: '✈️', blurb: 'Dubai, Malaysia, China, Bali and more.' }
+  };
+
+  function renderContinentTabs() {
+    const wrap = document.getElementById('continent-tabs');
+    const all = document.createElement('button');
+    all.type = 'button'; all.className = 'chip continent-chip' + (activeContinent ? '' : ' is-active'); all.textContent = 'All';
+    all.addEventListener('click', function () { activeContinent = ''; activeCategory = ''; renderChips(); renderGrid(); highlightContinent(all); });
+    wrap.appendChild(all);
+    BONFIRE_DATA.CONTINENTS.forEach(function (c) {
+      const meta = CONTINENT_META[c] || {};
+      const chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = 'chip continent-chip' + (activeContinent === c ? ' is-active' : '');
+      chip.textContent = (meta.emoji ? meta.emoji + ' ' : '') + c;
+      chip.addEventListener('click', function () { activeContinent = c; activeCategory = ''; renderChips(); renderGrid(); highlightContinent(chip); });
+      wrap.appendChild(chip);
+    });
+  }
+  function highlightContinent(el) {
+    document.querySelectorAll('#continent-tabs .chip').forEach(function (c) { c.classList.remove('is-active'); });
+    el.classList.add('is-active');
+  }
+
+  function renderChips() {
+    const wrap = document.getElementById('category-chips');
+    wrap.innerHTML = '';
+    const scoped = BONFIRE_DATA.DESTINATIONS.filter(function (d) { return !activeContinent || d.continent === activeContinent; });
+    const cats = Array.from(new Set(scoped.map(function (d) { return d.category; })));
+    const all = document.createElement('button');
+    all.type = 'button'; all.className = 'chip is-active'; all.textContent = 'All categories';
+    all.addEventListener('click', function () { activeCategory = ''; renderGrid(); highlightChip(all); });
+    wrap.appendChild(all);
+    cats.forEach(function (cat) {
+      const chip = document.createElement('button');
+      chip.type = 'button'; chip.className = 'chip'; chip.textContent = cat;
+      chip.addEventListener('click', function () { activeCategory = cat; renderGrid(); highlightChip(chip); });
+      wrap.appendChild(chip);
+    });
+  }
+  function highlightChip(el) {
+    document.querySelectorAll('#category-chips .chip').forEach(function (c) { c.classList.remove('is-active'); });
+    el.classList.add('is-active');
+  }
+
+  function renderGrid() {
+    const list = BONFIRE_DATA.DESTINATIONS.filter(function (d) {
+      if (activeContinent && d.continent !== activeContinent) return false;
+      if (activeCategory && d.category !== activeCategory) return false;
+      return true;
+    });
+    const wrap = document.querySelector('[data-destination-results]');
+    const meta = CONTINENT_META[activeContinent];
+    document.getElementById('page-title').textContent = activeContinent ? activeContinent + ' Destinations' : 'Explore Kenya, Africa & Beyond';
+    document.getElementById('page-sub').textContent = meta ? meta.blurb : 'Coast, safari country, lakes, highlands and cities — pick a continent, category or destination to start.';
+    if (!list.length) { wrap.innerHTML = Bonfire.emptyStateHTML({ title: 'No destinations in this category yet' }); return; }
+    wrap.innerHTML = list.map(function (d) {
+      const count = BONFIRE_DATA.PACKAGES.filter(function (p) { return p.destinationId === d.id; }).length;
+      const img = d.images && d.images[0] ? d.images[0].src : '';
+      return '<a class="region-tile region-tile--photo" href="destinations.html?id=' + d.id + '" style="display:block;">' +
+        (img ? '<div class="region-tile-media" data-bg="../' + img + '" role="img" aria-label="' + d.name + '"></div>' : '') +
+        '<div class="region-tile-body">' +
+        '<div style="font-family:var(--font-display);font-size:1.15rem;margin-bottom:4px;">' + d.name + '</div>' +
+        '<div style="font-size:.85rem;color:rgba(22,36,28,.65);margin-bottom:6px;">' + d.tagline + '</div>' +
+        '<span class="count">' + d.category + ' · ' + count + ' trip' + (count === 1 ? '' : 's') + '</span>' +
+        '</div></a>';
+    }).join('');
+    Bonfire.initLazyBackgrounds();
+  }
+
+  function renderDetail(dest) {
+    document.getElementById('page-title').textContent = dest.name;
+    document.getElementById('page-sub').textContent = dest.tagline;
+    document.querySelector('[data-detail-crumb]').textContent = dest.name;
+    document.title = dest.name + ' — Bonfire Adventures';
+    document.getElementById('list-view').hidden = true;
+    document.getElementById('detail-view').hidden = false;
+
+    const packages = BONFIRE_DATA.PACKAGES.filter(function (p) { return p.destinationId === dest.id; });
+    let hotels = BONFIRE_DATA.HOTELS.filter(function (h) { return h.destination === dest.id; }).slice(0, 3);
+    if (!hotels.length) hotels = BONFIRE_DATA.HOTELS.filter(function (h) { return h.region === dest.region; }).slice(0, 3);
+    const deals = BONFIRE_DATA.getActiveDeals().filter(function (dl) {
+      const pkg = dl.packageId && BONFIRE_DATA.getPackageById(dl.packageId);
+      return pkg && pkg.destinationId === dest.id;
+    });
+
+    let html = '';
+    const imgs = (dest.images || []).map(function (im) { return im.src; });
+    let usedImages = 0;
+
+    // Hero photo always shows first, under the page title/tagline.
+    if (imgs[0]) {
+      html += '<div class="dest-hero-photo" data-bg="../' + imgs[0] + '" role="img" aria-label="' + dest.name + '"></div>';
+      usedImages = 1;
+    }
+    html += '<div class="card-tags" style="margin-bottom:24px;margin-top:20px;">' + dest.experiences.map(function (e) { return '<span>' + e + '</span>'; }).join('') + '</div>';
+
+    // About + Why Visit, with the 2nd photo (if supplied) sitting under this section.
+    if (dest.description || (dest.highlights && dest.highlights.length)) {
+      if (dest.description) html += '<h2>About ' + dest.name + '</h2><p>' + dest.description + '</p>';
+      if (dest.highlights && dest.highlights.length) {
+        html += '<h3>Why Visit</h3><ul style="list-style:disc;padding-left:20px;margin-bottom:16px;">' + dest.highlights.map(function (h) { return '<li>' + h + '</li>'; }).join('') + '</ul>';
+      }
+      if (imgs[1]) {
+        html += '<div class="dest-section-photo" data-bg="../' + imgs[1] + '" role="img" aria-label="' + dest.name + ' highlights"></div>';
+        usedImages = 2;
+      }
+    }
+
+    // Things To Do, with the 3rd photo (if supplied) sitting under this section.
+    if (dest.thingsToDo && dest.thingsToDo.length) {
+      html += '<h3>Things To Do</h3><ul style="list-style:disc;padding-left:20px;margin-bottom:16px;">' + dest.thingsToDo.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul>';
+      if (imgs[2]) {
+        html += '<div class="dest-section-photo" data-bg="../' + imgs[2] + '" role="img" aria-label="' + dest.name + ' activities"></div>';
+        usedImages = 3;
+      }
+    }
+
+    // Any photos not already placed under a section (e.g. a destination
+    // with extra gallery shots but no About/Things To Do text yet) still
+    // get shown, as a simple gallery, so nothing supplied is ever dropped.
+    if (imgs.length > usedImages) {
+      html += '<div class="dest-gallery">' + imgs.slice(usedImages).map(function (src) {
+        return '<div class="dest-gallery-photo" data-bg="../' + src + '" role="img" aria-label="' + dest.name + '"></div>';
+      }).join('') + '</div>';
+    }
+
+    html += '<h2>Packages in ' + dest.name + '</h2>';
+    html += packages.length
+      ? '<div class="card-grid" style="margin-bottom:36px;">' + packages.map(Bonfire.packageCardHTML).join('') + '</div>'
+      : Bonfire.emptyStateHTML({ title: 'No packages listed for ' + dest.name + ' yet', text: 'Ask an Advisor — new inventory is added regularly.', altHref: 'packages.html', altLabel: 'Browse all packages' });
+
+    if (deals.length) {
+      html += '<h2>Active deals here</h2><div class="card-grid" style="margin-bottom:36px;">' + deals.map(Bonfire.dealCardHTML).join('') + '</div>';
+    }
+
+    html += '<h2>Nearby accommodation</h2>';
+    html += hotels.length
+      ? '<div class="card-grid">' + hotels.map(Bonfire.hotelCardHTML).join('') + '</div>'
+      : '<p style="color:rgba(22,36,28,.6);">No accommodation indexed for this region yet — try the full Hotels &amp; B&amp;Bs search.</p>';
+
+    document.getElementById('detail-content').innerHTML = html;
+    Bonfire.initWhatsAppButtons();
+    Bonfire.initLazyBackgrounds();
+  }
+
+  if (id) {
+    const dest = BONFIRE_DATA.getDestinationById(id);
+    if (dest) renderDetail(dest);
+    else {
+      document.getElementById('detail-view').hidden = false;
+      document.getElementById('list-view').hidden = true;
+      document.getElementById('detail-content').innerHTML = Bonfire.emptyStateHTML({ title: 'Destination not found', altHref: 'destinations.html', altLabel: 'Browse all destinations' });
+    }
+  } else {
+    renderContinentTabs();
+    renderChips();
+    renderGrid();
+  }
+})();
+</script>
+</body>
+</html>
