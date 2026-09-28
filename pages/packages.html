@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18467768974"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-18467768974');
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Packages — Bonfire Adventures</title>
@@ -188,7 +197,7 @@
         '<div style="grid-column:1/-1;display:grid;grid-template-columns:1.3fr 1fr;gap:32px;">' +
           '<div>' +
             '<div class="card-media"' + (img ? ' data-bg="../' + img + '"' : '') + ' style="aspect-ratio:16/9;border-radius:var(--radius);margin-bottom:20px;">' +
-              '<span class="badge">' + pkg.duration + '</span><span class="rating">★ ' + pkg.rating + ' (' + pkg.reviewCount + ' reviews)</span>' +
+              '<span class="rating">★ ' + pkg.rating + ' (' + pkg.reviewCount + ' reviews)</span>' +
             '</div>' +
             '<h2>Overview</h2><p>' + pkg.desc + '</p>' +
             (pkg.activities && pkg.activities.length ? '<h3>Things to do</h3><ul style="list-style:disc;padding-left:20px;margin-bottom:16px;">' + pkg.activities.map(function (i) { return '<li>' + i + '</li>'; }).join('') + '</ul>' : '') +
@@ -260,6 +269,34 @@
 
       function scrollToId(elId) { const el = document.getElementById(elId); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
 
+      // All packages are priced on a fixed "3 Days / 2 Nights" basis
+      // (pkg.pricedForDuration) regardless of the trip's marketed duration.
+      // When a customer picks a different number of nights via check-in/
+      // check-out, the package portion of the total must scale with them
+      // too — not just the hotel portion — otherwise a 5-night stay is
+      // quoted at the same package price as a 2-night stay.
+      function basePackageNights() {
+        const src = pkg.pricedForDuration || pkg.duration || '';
+        const m = /(\d+)\s*Night/i.exec(src);
+        const n = m ? parseInt(m[1], 10) : 0;
+        return n > 0 ? n : 2; // "3 Days / 2 Nights" fallback
+      }
+
+      function computeTotals(nights) {
+        const effectiveNights = nights || 1;
+        let packagePortion = null, hotelPortion = null, total = null;
+        if (pkg.price != null) {
+          packagePortion = Math.round((pkg.price / basePackageNights()) * effectiveNights);
+        }
+        if (chosenHotel && chosenHotel.price != null) {
+          hotelPortion = chosenHotel.price * effectiveNights;
+        }
+        if (packagePortion != null && hotelPortion != null) {
+          total = packagePortion + hotelPortion;
+        }
+        return { nights: effectiveNights, packagePortion: packagePortion, hotelPortion: hotelPortion, total: total };
+      }
+
       function computeNights() {
         const checkin = document.getElementById('pf-checkin') ? document.getElementById('pf-checkin').value : '';
         const checkout = document.getElementById('pf-checkout') ? document.getElementById('pf-checkout').value : '';
@@ -277,8 +314,10 @@
           summary.textContent = 'Package: ' + pkg.name + ' — Hotel: Travel Advisor\'s choice';
         } else if (chosenHotel) {
           let text = 'Package: ' + pkg.name + ' — Hotel: ' + chosenHotel.name;
-          if (nights && chosenHotel.price != null && pkg.price != null) {
-            text += ' — ' + nights + ' night(s) — Estimated total: ' + Bonfire.formatKES(pkg.price + chosenHotel.price * nights);
+          const t = computeTotals(nights);
+          if (nights && t.total != null) {
+            text += ' — ' + nights + ' night(s) — Estimated total: ' + Bonfire.formatKES(t.total) +
+              ' (package ' + Bonfire.formatKES(t.packagePortion) + ' + accommodation ' + Bonfire.formatKES(t.hotelPortion) + ')';
           } else {
             text += ' — add check-in/check-out dates to see your estimated total';
           }
@@ -334,14 +373,21 @@
           customLines.push('Note: Final price will include accommodation once a hotel is confirmed by the Travel Advisor.');
         } else if (chosenHotel) {
           customLines.push('Hotel: ' + chosenHotel.name + (chosenHotel.price != null ? ' (' + Bonfire.formatKES(chosenHotel.price) + ' per night)' : ''));
-          if (nights && chosenHotel.price != null) {
-            const hotelTotal = chosenHotel.price * nights;
-            customLines.push('Nights: ' + nights + ' (' + Bonfire.formatKES(hotelTotal) + ' accommodation total)');
-            if (pkg.price != null) {
-              customLines.push('Estimated combined total (package + ' + nights + ' night(s) accommodation): ' + Bonfire.formatKES(pkg.price + hotelTotal));
+          if (nights) {
+            const t = computeTotals(nights);
+            customLines.push('Nights: ' + nights);
+            if (t.packagePortion != null) {
+              customLines.push('Package cost for ' + nights + ' night(s), priced from ' + Bonfire.formatKES(pkg.price) + ' per person for ' + basePackageNights() + ' nights: ' + Bonfire.formatKES(t.packagePortion));
+            }
+            if (t.hotelPortion != null) {
+              customLines.push('Accommodation for ' + nights + ' night(s): ' + Bonfire.formatKES(t.hotelPortion));
+            }
+            if (t.total != null) {
+              customLines.push('Estimated combined total (package + ' + nights + ' night(s) accommodation): ' + Bonfire.formatKES(t.total));
             }
           } else if (pkg.price != null && chosenHotel.price != null) {
-            customLines.push('Estimated combined total (package + 1 night accommodation): ' + Bonfire.formatKES(pkg.price + chosenHotel.price) + ' — add check-in/check-out dates for an accurate multi-night total');
+            const t1 = computeTotals(1);
+            customLines.push('Estimated combined total (package + 1 night accommodation): ' + Bonfire.formatKES(t1.total) + ' — add check-in/check-out dates for an accurate multi-night total');
           }
         }
         if (name) customLines.push('Name: ' + name);
